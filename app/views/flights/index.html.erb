@@ -1,0 +1,26 @@
+<div class="row">
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Origin</th>
+        <th scope="col">destiny</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @flights.each do |flight| %>
+        <tr>
+            <td><%= flight.origin %></td>
+            <td><%= flight.destination %></td>
+            <td><%= flight.price %></td>            
+             <td> <%= link_to "buy", {controller: "transactions", action: "new", :flight_id=> flight.id} %> </td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
+<%= label_tag (:payment_method_token) %>
+<%= text_field_tag (:payment_method_token) %>
+
+</div>

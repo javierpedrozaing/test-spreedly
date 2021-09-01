@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  token: MyString
+  amount: 1
+  quantity: MyString
+  flight: 
+
+two:
+  token: MyString
+  amount: 1
+  quantity: MyString
+  flight: 

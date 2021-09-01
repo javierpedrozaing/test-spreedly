@@ -1,0 +1,39 @@
+<h2>Flight to <%= @flight.destination %></h2>
+
+
+<%= form_for( @transaction, remote: true) do |f| %>    
+    <div class="form-group">
+        <%= text_field_tag (:email) %>    
+        <%= check_box_tag (:expedia) %>
+        <%= f.label "Pay by expedia" %>
+        <%= check_box_tag (:save_card) %>
+        <%= f.label "Save my card" %>
+    </div>    
+    <%= hidden_field(:transaction, :token) %>
+    <%= f.hidden_field :flight_id, value: @flight.id %>
+    <%= f.hidden_field :amount, value: @flight.price %>
+
+    <button  onmouseover= "spreedlyInit()" onclick='SpreedlyExpress.openView()'>BUY</button> 
+
+<% end %>
+
+
+<script src="https://core.spreedly.com/iframe/express-2.min.js"></script>
+
+<script>
+
+function spreedlyInit() {
+    SpreedlyExpress.init("3n34eJVnlQizScWSkHhEDMLEKig", {
+    "amount": document.getElementById('transaction_amount').value,
+    "company_name": "Endava Widgets"
+    });
+}
+
+SpreedlyExpress.onPaymentMethod(function(token, paymentMethod) {
+    // Send requisite payment method info to backend
+    var tokenField = document.getElementById("transaction_token");
+    tokenField.setAttribute("value", token); 
+    var masterForm = document.getElementById('new_transaction');
+    masterForm.submit(); 
+});
+</script>
